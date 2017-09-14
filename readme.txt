@@ -1,10 +1,10 @@
 14/09/2017
 
 - Forkez le projet uploadImg sur votre compte
-- Créez un projet pour travailler sur votre fork (et uniquement celui-là) (conseil: utilisez les branches pour vos différents versions et pouvoir corriger une erreur éventuelle)
+- Créez un projet pour travailler sur votre fork (et uniquement celui-là) (conseil: utilisez les branches pour vos différentes versions et pouvoir corriger une erreur éventuelle)
 - Créez un formulaire de connexion sur toutes les pages permettant la connexion d'un utilisateur venant de la table users
 - Créez un c/ConnectController.php
 - Créez un m/Users.php et m/UsersManager.php
 - Créez une les dossiers v/upload/original |  v/upload/resize |  v/upload/thumbs
-- Lorsque l'on est pas connecté, on peut ajouter de photos
-- Si on est connecté on peut ajouter une photo (! à l'id de l'utilisateur qui doit être ajouté à Images.php et ImagesManager.php) et il existe un lien déconnexion
+- Lorsque l'on est pas connecté, on ne peut pas ajouter de photos
+- Si on est connecté on peut ajouter une photo (! à l'id de l'utilisateur qui doit être ajouté à Images.php et ImagesManager.php, venant de votre session d'identification) et il existe un lien déconnexion
