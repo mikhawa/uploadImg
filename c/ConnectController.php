@@ -40,10 +40,6 @@ if(isset($_SESSION['clefUnique'])){
         header("Location: ./");
     }
 }
-;
-
-
-
 
 
 // si on a envoyé le formulaire ET qu'on a un fichier uploadé
@@ -65,6 +61,7 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     $upImg->makeThumbs($imgInfo[0],$imgInfo[1],150,60);
     // modification de la variable POST nom avec le nouveau nom de fichier (nouveauNomFichier) venant de UploadImg (public)
     $_POST['nom']=$upImg->nouveauNomFichier;
+    $_POST['users_idusers']=$_SESSION['idusers'];
     // création de l'image pour l'insertion dans la db
     $objImg = new Images($_POST);
     // insertion dans la db
@@ -78,6 +75,17 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     //var_dump($_POST, $_FILES['limage'],$objImg,$upImh);
 } elseif(isset($_GET['upload'])) {
     echo $twig->render("form.html.twig",["menu"=>$recup_menu,"connect"=>$afficheUpload]);
+
+}elseif(isset($_GET['idcateg'])&& ctype_digit($_GET['idcateg'])) {
+    // on récupère les images de la catégorie
+    $ToutesImg = $manImages->AfficheParCateg($_GET['idcateg']);
+    // info categ
+    $infoCateg = $manCateg->afficheUne($_GET['idcateg']);
+    echo $twig->render("categ.html.twig",["infos"=>$infoCateg,"imgt"=>$ToutesImg,"menu"=>$recup_menu,"connect"=>true]);
+    // on veut se déconnecter
+} elseif(isset($_GET['deco'])) {
+    // déconnexion de la session
+        header("Location: disconnect.php");
 }else{
     $ToutesImg = $manImages->AfficheTous();
         //var_dump($ToutesImg);

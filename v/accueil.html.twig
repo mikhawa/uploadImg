@@ -12,8 +12,10 @@
                     {% endfor %}
                     {% if connect %}
                     <li><a href='?upload'>Envoyer une image</a></li>
+                    <li><a href="?deco">Déconnexion</a></li>
                         {% else%}
                     <li>{% include 'menu.html.twig'%}</li>
+                    
                     {% endif%}
                 </ul>
             {% endblock %}

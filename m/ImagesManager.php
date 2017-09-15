@@ -50,13 +50,14 @@ class ImagesManager {
     
     public function InsertImg(Images $img){
 
-        $sql = "INSERT INTO images (titre,`desc`,nom,largeOrigine,hautOrigine) VALUES (?,?,?,?,?);";
+        $sql = "INSERT INTO images (titre,`desc`,nom,largeOrigine,hautOrigine,users_idusers) VALUES (?,?,?,?,?,?);";
         $req = $this->db->prepare($sql);
         $req->bindValue(1, $img->getTitre(),PDO::PARAM_STR);
         $req->bindValue(2, $img->getDesc(),PDO::PARAM_STR);
         $req->bindValue(3, $img->getNom(),PDO::PARAM_STR);
         $req->bindValue(4, $img->getLargeOrigine(),PDO::PARAM_INT);
         $req->bindValue(5, $img->getHautOrigine(),PDO::PARAM_INT);
+        $req->bindValue(6, $img->getUsers_idusers(),PDO::PARAM_INT);
         try{
             // exécution
             $req->execute();
