@@ -12,6 +12,11 @@ require_once 'm/CategManager.php';
 require_once 'm/Users.php';
 require_once 'm/UsersManager.php';
 
+// création des manager's
+$manImages = new ImagesManager($connect);
+$manCateg = new CategManager($connect);
+$manUsers = new UsersManager($connect);
+
 // si on est connecté
 if(isset($_SESSION['clefUnique'])){
     // de manière valide
@@ -26,12 +31,11 @@ if(isset($_SESSION['clefUnique'])){
 }elseif(isset($_POST['login'])){
     $essai = new Users($_POST);
     //var_dump($essai);
+    $connect = $manUsers->connexionUsers($essai);
 }
 ;
 
-// création des manager's
-$manImages = new ImagesManager($connect);
-$manCateg = new CategManager($connect);
+
 
 // on récupère les rubriques pour le menu
 $recup_menu = $manCateg->afficheToutes();
