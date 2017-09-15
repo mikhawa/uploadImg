@@ -27,7 +27,8 @@ class UsersManager {
             
             $_SESSION = $req->fetch(PDO::FETCH_ASSOC);
             $_SESSION['clefUnique']= session_id();
-            var_dump($_SESSION);
+            // var_dump($_SESSION);
+            return true;
         // échec    
         }else{
             return false;

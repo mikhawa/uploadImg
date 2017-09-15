@@ -17,6 +17,9 @@ $manImages = new ImagesManager($connect);
 $manCateg = new CategManager($connect);
 $manUsers = new UsersManager($connect);
 
+// on récupère les rubriques pour le menu
+$recup_menu = $manCateg->afficheToutes();
+
 // si on est connecté
 if(isset($_SESSION['clefUnique'])){
     // de manière valide
@@ -32,13 +35,16 @@ if(isset($_SESSION['clefUnique'])){
     $essai = new Users($_POST);
     //var_dump($essai);
     $connect = $manUsers->connexionUsers($essai);
+    // si non connecté
+    if(!$connect){
+        header("Location: ./");
+    }
 }
 ;
 
 
 
-// on récupère les rubriques pour le menu
-$recup_menu = $manCateg->afficheToutes();
+
 
 // si on a envoyé le formulaire ET qu'on a un fichier uploadé
 if (!empty($_POST) && !empty($_FILES['limage'])) {
@@ -71,6 +77,10 @@ if (!empty($_POST) && !empty($_FILES['limage'])) {
     
     //var_dump($_POST, $_FILES['limage'],$objImg,$upImh);
 } elseif(isset($_GET['upload'])) {
-    echo $twig->render("form.html.twig",["menu"=>$recup_menu]);
+    echo $twig->render("form.html.twig",["menu"=>$recup_menu,"connect"=>$afficheUpload]);
+}else{
+    $ToutesImg = $manImages->AfficheTous();
+        //var_dump($ToutesImg);
+        echo $twig->render("accueil.html.twig",["imgt"=>$ToutesImg,"menu"=>$recup_menu,"connect"=>true]);
 }
 
