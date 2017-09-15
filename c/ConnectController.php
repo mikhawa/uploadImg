@@ -3,11 +3,20 @@
  * Section d'admin et connexion
  */
 
+// chargement des dépendances
+require_once 'm/UploadImg.php';
+require_once 'm/Images.php';
+require_once 'm/ImagesManager.php';
+require_once 'm/Categ.php';
+require_once 'm/CategManager.php';
+require_once 'm/Users.php';
+require_once 'm/UsersManager.php';
+
 // si on est connecté
 if(isset($_SESSION['clefUnique'])){
     // de manière valide
     if($_SESSION['clefUnique']== session_id()){
-    
+        $afficheUpload = true;
     // non valide    
     }else{
         // déconnexion de la session
@@ -15,15 +24,10 @@ if(isset($_SESSION['clefUnique'])){
     }
 // on essaye de se connecter     
 }elseif(isset($_POST['login'])){
-    var_dump($_POST);
+    $essai = new Users($_POST);
+    //var_dump($essai);
 }
-
-// chargement des dépendances
-require_once 'm/UploadImg.php';
-require_once 'm/Images.php';
-require_once 'm/ImagesManager.php';
-require_once 'm/Categ.php';
-require_once 'm/CategManager.php';
+;
 
 // création des manager's
 $manImages = new ImagesManager($connect);
